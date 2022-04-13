@@ -105,3 +105,26 @@
       </body>
 </html>
 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function GetTemp() {
+      var number = "20 °C";
+      document.getElementById("tempVal").innerHTML = number;
+    }
+  </script>
+</head>
+<body onload="GetTemp()">
+  <h2 style="text-align:center;">Contrôle d’une porte d’aération d’une serre</h2>
+  <label style="padding: 10%;" id="temp" name="temp">Température ambiante : </label>
+  <label id="tempValue" name="tempValue"><span id="tempVal"></span></label><br><br>
+  <label style="padding: 10%;" id="ctrl" name ="ctrl">Contrôle :</label>
+  <input type="button" onclick="alert('Mode Automatique')" value="Automatique"><br>
+  <input style="margin-left:35%;" type="button" onclick="alert('Mode Manuelle')" value="Manuelle"><br><br>
+  <label style="padding: 10%;" id="act" name ="ctrl">Action :</label><br><br>
+</body>
+</html>
