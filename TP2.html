@@ -11,9 +11,59 @@
       z-index: 1;
       } 
 
+      .title {
+      top:1%;
+      left:5%;
+      width:1000px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: white; 
+      }
+
+      .temp_value {
+      top:6%;
+      left:5%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: white; 
+      }
+      
+      .temp {
+      top:6%;
+      left:17%;
+      width:40px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: white; 
+      }
+      
+      .control {
+      top:11%;
+      left:0%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: white; 
+      }
+
       .button_auto {
       top:11%;
-      left:5%;
+      left:10%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: white; 
+      }
+      
+      .Control {
+      top:11%;
+      left:0%;
       width:100px;
       height:40px;
       position: absolute;
@@ -23,7 +73,17 @@
       
       .button_Manual {
       top:22%;
-      left:5%;
+      left:10%;
+      width:100px;
+      height:40px;
+      position: absolute;
+      z-index: 2;
+      background: white; 
+      }
+      
+      .action {
+      top:33%;
+      left:0%;
       width:100px;
       height:40px;
       position: absolute;
@@ -33,7 +93,7 @@
       
       .button_open {
       top:33%;
-      left:5%;
+      left:10%;
       width:100px;
       height:40px;
       position: absolute;
@@ -43,7 +103,7 @@
       
       .button_close {
       top:33%;
-      left:20%;
+      left:25%;
       width:100px;
       height:40px;
       position: absolute;
@@ -53,7 +113,7 @@
       
       .button_graph {
       top:44%;
-      left:5%;
+      left:10%;
       width:100px;
       height:40px;
       position: absolute;
@@ -91,8 +151,13 @@
     <body style="text-align:center; margin: 0px;">
 
       <div class="mycenter" id="">
+        <h2 style="text-align:center;" class ="title">Contrôle d’une porte d’aération d’une serre</h2>
+        <label class ="temp_value" name="temp">Température ambiante : </label>
+        <label id="tempValue" class="temp" name="tempValue"><span id="tempVal"></span></label><br><br>
+        <label class ="control" id="ctrl" name ="ctrl">Contrôle :</label>
         <input type="button" class="button_auto" value="automatique" />
         <input type="button" class="button_Manual" value="manuelle" />
+        <label class ="action" id="act" name ="ctrl">Action :</label><br><br>
         <input type="button" class="button_open" value="Ouvrir la porte" />
         <input type="button" class="button_close" value="Fermer la porte" />
         <input type="button" class="button_graph" value="Graphique" />
@@ -119,12 +184,7 @@
   </script>
 </head>
 <body onload="GetTemp()">
-  <h2 style="text-align:center;">Contrôle d’une porte d’aération d’une serre</h2>
-  <label style="padding: 10%;" id="temp" name="temp">Température ambiante : </label>
-  <label id="tempValue" name="tempValue"><span id="tempVal"></span></label><br><br>
-  <label style="padding: 10%;" id="ctrl" name ="ctrl">Contrôle :</label>
-  <input type="button" onclick="alert('Mode Automatique')" value="Automatique"><br>
-  <input style="margin-left:35%;" type="button" onclick="alert('Mode Manuelle')" value="Manuelle"><br><br>
-  <label style="padding: 10%;" id="act" name ="ctrl">Action :</label><br><br>
+  
+
 </body>
 </html>
