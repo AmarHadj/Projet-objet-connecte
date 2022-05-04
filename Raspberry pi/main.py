@@ -18,7 +18,7 @@ class MainWindow(object):
         self.thermometer = Thermometer()
         self.steppingMotor = SteppingMotor()
         self.ultrasonicRanging = UltrasonicRanging()
-        self.azureCloud = AzureClound()
+        self.azureCloud = AzureCloud()
         
         self.mode = "auto"
 
