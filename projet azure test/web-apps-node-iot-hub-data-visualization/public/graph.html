@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Graphique</title>
+</head>
+
+<body>
+    <a href="index.html">
+        <input type="button" value="Retour" />
+    </a>
+    <canvas id="chart"></canvas>
+    <script>
+        const xTime = [];
+        const yTemp = [];
+        const yPourcentage = [];
+        ChartIt();
+
+        async function ChartIt() {
+            await getData();
+            const data = {
+                labels: xTime,
+                datasets: [{
+                    label: 'Température selon le temps',
+                    data: yTemp,
+                    borderColor: 'rgb(255, 99, 132)',
+                }, {
+                    label: "Pourcentage selon le temps",
+                    data: yPourcentage,
+                    borderColor: 'rgb(54, 162, 235)'
+                }]
+            };
+            const config = {
+                type: 'line',
+                data: data,
+                options: {}
+            };
+            const ctx = new Chart(document.getElementById('chart'), config);
+        }
+
+        async function getData() {
+            xTime.push("15h00");
+            xTime.push("16h00");
+            xTime.push("17h00");
+            xTime.push("18h00");
+
+            yTemp.push("23");
+            yTemp.push("24");
+            yTemp.push("26");
+            yTemp.push("22");
+
+            yPourcentage.push("80");
+            yPourcentage.push("90");
+            yPourcentage.push("100");
+            yPourcentage.push("60");
+
+        }
+    </script>
+</body>
+
+</html>
