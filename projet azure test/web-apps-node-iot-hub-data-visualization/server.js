@@ -32,10 +32,17 @@ wss.broadcast = (data) => {
     if (client.readyState === WebSocket.OPEN) {
       try {
         //console.log(`Broadcasting data ${data}`);
-        const myArray = data.split('"'); 
+        const myArray = data.split('"');
         console.log(myArray[5]);
         //document.getElementById('tempVal').innerHTML = myArray[5];
-        client.send(data);
+        
+        server.on('connection', function(ws){
+          ws.on('message', function(){
+            ws.send(myArray[5]);
+            console.log("message envoyer : " + myArray[5]);
+          });
+        });
+
       } catch (e) {
         console.error(e);
       }

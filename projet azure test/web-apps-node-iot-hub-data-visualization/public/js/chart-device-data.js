@@ -39,6 +39,7 @@ $(document).ready(() => {
     findDevice(deviceId) {
       for (let i = 0; i < this.devices.length; ++i) {
         if (this.devices[i].deviceId === deviceId) {
+          console.log("test 0");
           return this.devices[i];
         }
       }
@@ -121,6 +122,7 @@ $(document).ready(() => {
   const listOfDevices = document.getElementById('listOfDevices');
   function OnSelectionChange() {
     const device = trackedDevices.findDevice(listOfDevices[listOfDevices.selectedIndex].text);
+    console.log("test 1");
     chartData.labels = device.timeData;
     chartData.datasets[0].data = device.temperatureData;
     chartData.datasets[1].data = device.humidityData;
@@ -136,6 +138,7 @@ $(document).ready(() => {
   // 5. Update the chart UI
   webSocket.onmessage = function onMessage(message) {
     try {
+      console.log("test 2");
       const messageData = JSON.parse(message.data);
       console.log(messageData);
 
