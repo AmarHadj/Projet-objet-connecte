@@ -27,6 +27,8 @@ app.use((req, res /* , next */) => {
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
+
+
 wss.broadcast = (data) => {
   wss.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
@@ -41,6 +43,24 @@ wss.broadcast = (data) => {
     }
   });
 };
+
+// const {createPool} = require('mysql')
+// wss.on("connection",ws =>{
+
+//     const pool = createPool({
+//         host: "tp2.mariadb.database.azure.com", 
+//         user: "tp2user@tp2", 
+//         password: "!FG456dj1",
+//         database: "azureTp2", 
+//         port: 3306   
+//     })
+    
+//     pool.query('select * from graphtable', (err, res) =>{
+//         ws.send(res);
+//         console.log(res)
+//     })
+// });
+
 
 server.listen(process.env.PORT || '3000', () => {
   console.log('Listening on %d.', server.address().port);
