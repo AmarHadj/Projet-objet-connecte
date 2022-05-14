@@ -6,8 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"" type="text/javascript" charset="utf-8"></script>
-    <!-- <script src="js/chart-device-data.js" type="text/javascript" charset="utf-8"></script> -->
     <link href="css/style.css" rel="stylesheet" /> 
 
     
@@ -19,15 +17,14 @@
     <div class="mycenter" id="">
       <h2 style="text-align:center;" class ="title">Contrôle d’une porte d’aération d’une serre</h2>
       <label class ="temp_value" name="temp">Température ambiante : </label>
-      <label id="tempValue">
-
-      </label>
+      <label id="tempValue" class="temp" name="tempValue"><span id="tempVal"></span></label><br><sbr>
       <label class ="control" id="ctrl" name ="ctrl">Contrôle :</label>
-      <input type="button" class="button_auto" value="automatique" />
-      <input type="button" class="button_Manual" value="manuelle" />
+      <input type="button" class="button_auto" value="automatique" id="Auto"/>
+      <input type="button" class="button_Manual" value="manuelle" id = "Manuel"/>
+      <input type="text" class="pourcentage_Manual" id="pourcentage_Manual" name="pourcentageManu" value="">
       <label class ="action" id="act" name ="ctrl">Action :</label><br><br>
-      <input type="button" class="button_open" value="Ouvrir la porte" />
-      <input type="button" class="button_close" value="Fermer la porte" />
+      <input type="button" class="button_open" value="Ouvrir la porte" id = "Open"/>
+      <input type="button" class="button_close" value="Fermer la porte" id = "Close"/>
       <a href="graph.html">
         <input type="button" class="button_graph" value="Graphique de températures et
 de pourcentages par période" />
@@ -36,7 +33,7 @@ de pourcentages par période" />
     </div>
 
     <div class="loadbar">
-      <strong class="bar" style='height:50%;'>50%</strong>
+      <strong class="bar" id="pourcentageOpening"></strong>
     </div>   
     </body>
 
@@ -51,21 +48,48 @@ de pourcentages par période" />
   <script>
     var ws = new WebSocket("ws://localhost:3000");
     var temp = document.getElementById("tempValue");
+    var pourcentageOpening = document.getElementById("pourcentageOpening");
+    var Control = document.getElementById("controlValue");
 
     ws.onmessage = function(event){
 
       console.log(event);
-      temp.innerHTML += event.data;
+      var Myarray = event.data.split("/");
+      temp.innerHTML = Myarray[0];
+      pourcentageOpening.innerHTML = Myarray[1];
+      document.getElementById("pourcentageOpening").style = "height:" + Myarray[1] +"%;";
+      
+      document.getElementById("pourcentage_Manual").value = Myarray[3];
+      
+      document.getElementById("Auto").style.background = '#ffffff'
+      document.getElementById("Manuel").style.background = '#ffffff'
+      document.getElementById("Open").style.background = '#ffffff'
+      document.getElementById("Close").style.background = '#ffffff'
+
+      switch(Myarray[2]){        
+        
+        case "auto" :
+          document.getElementById("Auto").style.background = '#00b050'
+          break;
+
+        case "manual" :
+          document.getElementById("Manuel").style.background = '#00b050'
+          break;
+
+        case "open" :
+          document.getElementById("Open").style.background = '#00b050'
+          break;
+
+        case "close" :
+          document.getElementById("Close").style.background = '#00b050'
+          break;
+      }
+
+      
+      
+
 
     }
-
-
-
-
-    // function GetTemp() {
-    //   var number = "20 °C";
-    //   document.getElementById("tempVal").innerHTML = number;
-    // }
   </script>
 </head>
 <!-- <body onload="GetTemp()"> -->

@@ -77,6 +77,15 @@
   background: white; 
   }
 
+  .pourcentage_Manual {
+    top:28%;
+    left:16%;
+    width:50px;
+    height:30px;
+    position: absolute;
+    z-index: 2;
+    background: white; 
+    }
   .action {
   top:39%;
   left:0%;
@@ -119,13 +128,13 @@
 
   .loadbar
   {
-  top:10%;
+  top:15%;
   left:500px;
   width:25px;
   height:200px;
   background-color:#fff;
   border:1px solid #ccc;
-  position:relative; 
+  position:absolute; 
   }
   .bar
   {

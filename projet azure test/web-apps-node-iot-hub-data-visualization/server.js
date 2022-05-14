@@ -31,18 +31,10 @@ wss.broadcast = (data) => {
   wss.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       try {
-        //console.log(`Broadcasting data ${data}`);
+        console.log(`Broadcasting data ${data}`);
         const myArray = data.split('"');
         console.log(myArray[5]);
-        //document.getElementById('tempVal').innerHTML = myArray[5];
-        
-        server.on('connection', function(ws){
-          ws.on('message', function(){
-            ws.send(myArray[5]);
-            console.log("message envoyer : " + myArray[5]);
-          });
-        });
-
+        client.send(myArray[5] + "/" + myArray[9]+ "/" + myArray[13]+ "/" + myArray[17]);
       } catch (e) {
         console.error(e);
       }
@@ -71,3 +63,8 @@ const eventHubReader = new EventHubReader(iotHubConnectionString, eventHubConsum
     }
   });
 })().catch();
+
+
+
+
+
