@@ -15,7 +15,7 @@
         <input type="button" value="Retour" />
     </a>
     <canvas id="chart"></canvas>
-    <script>
+    <script type="module">
         const xTime = [];
         const yTemp = [];
         const yPourcentage = [];
@@ -44,6 +44,17 @@
         }
 
         async function getData() {
+
+            const ws = new WebSocket("ws://localhost:8085");
+
+            ws.addEventListener("open",() =>{
+                console.log("Connecté !");
+            });
+
+            ws.addEventListener("message", e =>{
+                console.log("client : "+ e.res)
+            });
+
             xTime.push("15h00");
             xTime.push("16h00");
             xTime.push("17h00");
