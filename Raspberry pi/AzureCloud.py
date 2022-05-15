@@ -1,10 +1,6 @@
-# sudo python3 -m pip install --upgrade requests
-# pip3 install azure-iot-device
-
 import uuid
 from azure.iot.device import IoTHubDeviceClient
 from azure.iot.device import Message
-
 
 class AzureCloud(object):
     def __init__(self):
@@ -21,7 +17,6 @@ class AzureCloud(object):
             msg = Message(message)
             msg.message_id = uuid.uuid4()
             msg.correlation_id = 'correlation-1234'
-            # msg.custom_properties['tornado-warning'] = 'yes'
             msg.content_encoding = 'utf-8'
             msg.content_type = 'application/json'
             self.Device_client.send_message(msg)
@@ -31,5 +26,4 @@ class AzureCloud(object):
         except Exception:
             print("Unexpected exception!")
             raise
-        # finally:
-        # self.Device_client.shutdown()
+

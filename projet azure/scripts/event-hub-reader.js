@@ -1,5 +1,5 @@
 /*
- * Microsoft Sample Code - Copyright (c) 2020 - Licensed MIT
+ * Code qui lit les messages dans Azure
  */
 
 const { EventHubProducerClient, EventHubConsumerClient } = require('@azure/event-hubs');

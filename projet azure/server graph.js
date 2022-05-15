@@ -1,3 +1,5 @@
+// création d’un serveur web et se connecte au serveur de bd de maria dB pour récupérer les informations d’une table
+
 const WebSocket = require("ws")
 const wss = new WebSocket.Server({port : 8085});
 const {createPool} = require('mysql')
@@ -15,5 +17,3 @@ wss.on("connection",ws =>{
         ws.send(String(typeof res));
     })
 });
-
-

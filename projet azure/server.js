@@ -1,3 +1,6 @@
+//Classe qui ajoute dans la BD locale les informations des messages avant de l’envoyer
+//Source : https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-live-data-visualization-in-web-apps
+
 const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
@@ -28,38 +31,20 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 
-
 wss.broadcast = (data) => {
   wss.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       try {
         console.log(`Broadcasting data ${data}`);
         const myArray = data.split('"');
-        console.log(myArray[5]);
         client.send(myArray[5] + "/" + myArray[9]+ "/" + myArray[13]+ "/" + myArray[17]);
+
       } catch (e) {
         console.error(e);
       }
     }
   });
 };
-
-// const {createPool} = require('mysql')
-// wss.on("connection",ws =>{
-
-//     const pool = createPool({
-//         host: "tp2.mariadb.database.azure.com", 
-//         user: "tp2user@tp2", 
-//         password: "!FG456dj1",
-//         database: "azureTp2", 
-//         port: 3306   
-//     })
-    
-//     pool.query('select * from graphtable', (err, res) =>{
-//         ws.send(res);
-//         console.log(res)
-//     })
-// });
 
 
 server.listen(process.env.PORT || '3000', () => {

@@ -1,7 +1,5 @@
-// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT Licence.
-
 /*
+  utilisé par le server.js pour récupérer les messages a partir du iot hub
   This sample was taken from https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/eventhub/event-hubs/samples/javascript/iothubConnectionString.js
 */
 

@@ -4,6 +4,7 @@ from SteppingMotor import *
 from Thermometer import *
 from UltrasonicRanging import *
 from AzureCloud import *
+from Database import *
 import logging
 import json
 
@@ -19,6 +20,7 @@ class MainWindow(object):
         self.steppingMotor = SteppingMotor()
         self.ultrasonicRanging = UltrasonicRanging()
         self.azureCloud = AzureCloud()
+        self.database = Database()
         
         self.mode = "auto"
 
@@ -74,7 +76,7 @@ class MainWindow(object):
         self.root.after(50, self.show_temp)
         self.root.after(50, self.show_distance)
         self.root.after(50, self.run)
-        self.root.after(60000, self.send_message)
+        self.root.after(6000, self.send_message)
         self.root.mainloop()
 
     # S'occupe du déroulement dépendament du mode
@@ -176,6 +178,12 @@ class MainWindow(object):
     def show_door_percentage(self):
         percentage = ((int(self.distance.get()[:2]) - 7) / 7) * 100
         self.showing_bar['value'] = percentage
+        if percentage > 100 :
+            percentage = 100
+        if percentage < 0 :
+            percentage = 0
+            
+        self.current_percentage.set(str(int(percentage)) + " %")
 
     # Affiche la température
     def show_temp(self):
@@ -196,7 +204,7 @@ class MainWindow(object):
         logging.info("Destroy")
         self.thermometer.destroy()
     
-    # Envoyer un message a Azure
+    # Envoyer un message a Azure et l'ajouter dans la BD
     def send_message(self):
         if (self.mode == "manual" and int(self.percentage_input.get())):
             manual_value = str(self.percentage_input.get())
@@ -204,14 +212,14 @@ class MainWindow(object):
             manual_value = ""
              
         msg = {
-          "temp": str(self.temp.get()),
-          "pourcentageOpeningDoor": str(self.distance.get()),
-          "Control": self.mode,
+          "temp": str(self.temp.get()).replace(" °C",""),
+          "pourcentageOpeningDoor": str(self.current_percentage.get()).replace(" %",""),
+          "control": self.mode,
           "pourcentageManual": manual_value
           }
-        
+        self.database.add(str(self.temp.get()), str(self.current_percentage.get()),self.mode, manual_value)
         self.azureCloud.send(json.dumps(msg))
-        self.root.after(60000, self.send_message)
+        self.root.after(6000, self.send_message)
 
 
 if __name__ == '__main__':
